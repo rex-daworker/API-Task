@@ -33,17 +33,12 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Application = void 0;
+exports.InterviewNote = void 0;
 const mongoose_1 = __importStar(require("mongoose"));
-const ApplicationSchema = new mongoose_1.Schema({
-    candidate: { type: mongoose_1.Schema.Types.ObjectId, ref: "Candidate", required: true },
-    position: { type: String, required: true },
-    status: {
-        type: String,
-        enum: ["applied", "screening", "interview", "rejected", "accepted"],
-        required: true
-    },
-    source: String,
-    applied_at: { type: Date, default: Date.now }
+const InterviewNoteSchema = new mongoose_1.Schema({
+    application: { type: mongoose_1.Schema.Types.ObjectId, ref: "Application", required: true },
+    note: String,
+    rating: { type: Number, min: 1, max: 5, required: true },
+    created_at: { type: Date, default: Date.now }
 });
-exports.Application = mongoose_1.default.model("Application", ApplicationSchema);
+exports.InterviewNote = mongoose_1.default.model("InterviewNote", InterviewNoteSchema);

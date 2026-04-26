@@ -1,1 +1,14 @@
-"use strict";
+import mongoose from "mongoose";
+
+export const connectDB = async () => {
+  try {
+    const uri = process.env.MONGO_URI as string;
+    if (!uri) throw new Error("MONGO_URI not set");
+
+    await mongoose.connect(uri);
+    console.log("MongoDB connected");
+  } catch (err) {
+    console.error("DB connection error:", err);
+    process.exit(1);
+  }
+};

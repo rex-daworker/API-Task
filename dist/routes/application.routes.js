@@ -1,0 +1,12 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const application_controller_1 = require("../controllers/application.controller");
+const interviewNote_controller_1 = require("../controllers/interviewNote.controller");
+const validateObjectId_1 = require("../middleware/validateObjectId");
+const router = (0, express_1.Router)();
+router.post("/", application_controller_1.createApplication);
+router.get("/", application_controller_1.getApplications);
+router.post("/:id/notes", validateObjectId_1.validateObjectId, interviewNote_controller_1.createNote);
+router.get("/:id/notes", validateObjectId_1.validateObjectId, interviewNote_controller_1.getNotes);
+exports.default = router;
