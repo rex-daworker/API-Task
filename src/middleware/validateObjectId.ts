@@ -2,8 +2,11 @@ import { Request, Response, NextFunction } from "express";
 import mongoose from "mongoose";
 
 export const validateObjectId = (req: Request, res: Response, next: NextFunction) => {
-  if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+  const id = req.params.id as string;  // FIXED
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(400).json({ message: "Invalid ID" });
   }
+
   next();
 };
